@@ -25,14 +25,16 @@ export default async function InvoicesTable({
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
-                    <div className="mb-2 flex items-center">
-                      <Image
-                        src={invoice.image_url}
-                        className="mr-2 rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      />
+                    <div className="mb-2 flex items-center gap-3">
+                      <div className="h-auto w-auto">
+                        <Image
+                          src={invoice.image_url}
+                          className="h-8 w-8 rounded-full object-cover"
+                          alt={`${invoice.name}'s profile picture`}
+                          width={28}
+                          height={28}
+                        />
+                      </div>
                       <p>{invoice.name}</p>
                     </div>
                     <p className="text-sm text-gray-500">{invoice.email}</p>
@@ -85,13 +87,15 @@ export default async function InvoicesTable({
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      <Image
-                        src={invoice.image_url}
-                        className="rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      />
+                      <div className="h-auto w-auto">
+                        <Image
+                          src={invoice.image_url}
+                          className="h-8 w-8 rounded-full object-cover"
+                          alt={`${invoice.name}'s profile picture`}
+                          width={28}
+                          height={28}
+                        />
+                      </div>
                       <p>{invoice.name}</p>
                     </div>
                   </td>

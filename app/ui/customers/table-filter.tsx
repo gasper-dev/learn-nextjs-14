@@ -1,17 +1,20 @@
 import Image from 'next/image';
-import { fetchCustomersALL } from '@/app/lib/data';
-import { UpdateCustomer, DeleteCustomer } from '@/app/ui/customers/buttons';
-export default async function CustomersTable({
+import { fetchFilteredCustomers } from '@/app/lib/data';
+import Filter from './filter';
+export default async function CustomersTableFilter({
   query,
+  filter,
   currentPage,
 }: {
   query: string;
+  filter: string;
   currentPage: number;
 }) {
-  const customers = await fetchCustomersALL(query, currentPage);
+  const customers = await fetchFilteredCustomers(query, filter, currentPage);
   return (
     <div className="mt-6 flow-root">
       <div className="overflow-x-auto">
+        <Filter />
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
             <div className="md:hidden">
@@ -39,7 +42,7 @@ export default async function CustomersTable({
                       <p className="text-sm text-gray-500">{customer.email}</p>
                     </div>
                   </div>
-                  {/*   <div className="flex w-full items-center justify-between border-b py-5">
+                  <div className="flex w-full items-center justify-between border-b py-5">
                     <div className="flex w-1/2 flex-col">
                       <p className="text-xs">Pending</p>
                       <p className="font-medium">{customer.total_pending}</p>
@@ -52,7 +55,6 @@ export default async function CustomersTable({
                   <div className="pt-4 text-sm">
                     <p>{customer.total_invoices} invoices</p>
                   </div>
-                  */}
                 </div>
               ))}
             </div>
@@ -65,7 +67,7 @@ export default async function CustomersTable({
                   <th scope="col" className="px-3 py-5 font-medium">
                     Email
                   </th>
-                  {/*  <th scope="col" className="px-3 py-5 font-medium">
+                  <th scope="col" className="px-3 py-5 font-medium">
                     Total Invoices
                   </th>
                   <th scope="col" className="px-3 py-5 font-medium">
@@ -73,10 +75,6 @@ export default async function CustomersTable({
                   </th>
                   <th scope="col" className="px-4 py-5 font-medium">
                     Total Paid
-                  </th>
-                  */}
-                  <th scope="col" className="relative py-3 pl-6 pr-3">
-                    <span className="sr-only">Edit</span>
                   </th>
                 </tr>
               </thead>
@@ -102,7 +100,7 @@ export default async function CustomersTable({
                     <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                       {customer.email}
                     </td>
-                    {/*<td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                    <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                       {customer.total_invoices}
                     </td>
                     <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
@@ -110,12 +108,6 @@ export default async function CustomersTable({
                     </td>
                     <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
                       {customer.total_paid}
-                    </td> */}
-                    <td className="whitespace-nowrap bg-white py-3 pl-6 pr-3">
-                      <div className="flex justify-end gap-3">
-                        <UpdateCustomer id={customer.id} />
-                        <DeleteCustomer id={customer.id} />
-                      </div>
                     </td>
                   </tr>
                 ))}
