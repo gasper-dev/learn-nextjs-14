@@ -37,7 +37,7 @@ const formSchemaCustomer = z.object({
 
 export type StateCustomer = {
   errors?: {
-    name: string[];
+    name?: string[];
     email?: string[];
     image_url?: string[];
   };
